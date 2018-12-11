@@ -1,14 +1,7 @@
-dataraw = [line for line in open("day10input.txt").read().splitlines()]
-data = []
-
-for d in dataraw: #Imagine useing regex. This meme was made by split gang
-    data.append([int(d.split("<")[1].split(",")[0]), int(d.split(">")[0].split()[-1]),
-                 int(d.split("<")[2].split(",")[0]), int(d.split(">")[1].split()[-1])])
-
+import re
+data = [list(map(int, re.findall(r"position=<\s*(-?\d+),\s*(-?\d+)> velocity=<\s*(-?\d+),\s*(-?\d+)>", line)[0])) for line in open("day10input.txt").read().splitlines()]
 dist = 99999999
-
 time = 0
-
 while True:
     xp = []
     yp = []
@@ -17,17 +10,12 @@ while True:
         d[1] = d[1] + d[3]
         xp.append(d[0])
         yp.append(d[1])
-    xa = sum(xp) / len(xp)
-    ya = sum(yp) / len(yp)
-
-    testdist = 0
-    for d in data:
-        testdist += abs(d[0] - xa) + abs(d[1] - ya)
+    testdist = max(xp) - min(xp) + max(yp) - min(yp)
     if testdist > dist:
         for d in data:
             d[0] = d[0] - d[2]
             d[1] = d[1] - d[3]
-        break;
+        break; #Exit loop
     else:
         dist = testdist
     time+=1
