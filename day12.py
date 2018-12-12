@@ -20,7 +20,7 @@ for gen in range(gens):
     diff = currentsum - prev
     if gen == 19:
         print(currentsum)
-    if diff in diffs and diffs[diff] > 200: #Total of 1000 occurnces of the same diffrence
+    if diff in diffs and diffs[diff] > 200: #Total of 200 occurnces of the same diffrence
         print(currentsum + (gens - gen - 1) * diff)
         break;
     if diff not in diffs:
