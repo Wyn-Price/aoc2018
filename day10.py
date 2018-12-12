@@ -19,24 +19,16 @@ while True:
     else:
         dist = testdist
     time+=1
-
-
 outdata = ""
-
-outx = [x for (x, y, vx, vy) in data]
-outy = [y for (x, y, vx, vy) in data]
-
 pos = [(x, y) for (x, y, vx, vy) in data]
-
-for y in range(min(outy) - 1, max(outy) + 1):
-    for x in range(min(outx) - 1, max(outx) + 1):
+for y in range(min(pos, key=lambda d:d[1])[1], max(pos, key=lambda d:d[1])[1] + 1):
+    for x in range(min(pos, key=lambda d:d[0])[0], max(pos, key=lambda d:d[0])[0] + 1):
         if (x, y) in pos:
             outdata += "#"
         else:
             outdata += " "
     outdata += "\n"
-
-print(outdata)
+print(outdata.strip())
 print(time)
 
 
